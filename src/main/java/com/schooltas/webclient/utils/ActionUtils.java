@@ -12,11 +12,11 @@ public class ActionUtils extends BaseTest{
 		LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
 
 		if (organization == "publisher") {
-			loginPage.loginDashboard(TEST_PUBLISHER_EMAIL, TEST_PUBLISHER_PASS);
+			loginPage.login(TEST_PUBLISHER_EMAIL, TEST_PUBLISHER_PASS);
 		} else if (organization == "distributor") {
-			loginPage.loginDashboard(TEST_DISTRIBUTOR_EMAIL, TEST_DISTRIBUTOR_PASS);
+			loginPage.login(TEST_DISTRIBUTOR_EMAIL, TEST_DISTRIBUTOR_PASS);
 		} else if (organization == "school") {
-			loginPage.loginDashboard(TEST_SCHOOL_EMAIL, TEST_SCHOOL_PASS);
+			loginPage.login(TEST_SCHOOL_EMAIL, TEST_SCHOOL_PASS);
 		}
 	}
 
