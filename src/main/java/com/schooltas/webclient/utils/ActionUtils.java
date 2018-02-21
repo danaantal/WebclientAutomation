@@ -7,7 +7,7 @@ import com.schooltas.webclient.tests.BaseTest;
 
 
 public class ActionUtils extends BaseTest{
-	public static void loginAs(String organization) {
+	public static void loginAs(String organization) throws InterruptedException {
 
 		LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
 

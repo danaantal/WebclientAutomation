@@ -1,5 +1,11 @@
 package com.schooltas.webclient.pages.loginpage;
 
+import static org.testng.Assert.assertEquals;
+
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -12,7 +18,8 @@ public class LoginPage {
 	private static WebDriver driver;
 
 	public LoginPage(WebDriver driver) {
-		LoginPage.driver = driver;
+		
+		LoginPage.driver = driver;	
 	}
 
 	@FindBy(id = "login-email")
@@ -21,24 +28,50 @@ public class LoginPage {
 	@FindBy(id = "login-password")
 	WebElement passwordField;
 
-	@FindBy(id = "logins")
+	@FindBy(how = How.XPATH, using = "//div[@id='logins']")
 	WebElement loginBtn;
 
-	@FindBy(how = How.CLASS_NAME, using = "alert-overlay")
+	@FindBy(how = How.XPATH, using = "//div[@id='alert-popup']")
 	WebElement alertOverlay;
+	
+	@FindBy(how = How.XPATH, using = "//*[contains(text(), 'reinvent learning')]")
+	WebElement header;
+	
+	@FindBy(how = How.CSS, using = ".current-language")
+	WebElement currentLanguage;
+	
+	@FindBy(how = How.XPATH, using = "//div[contains(@class,'language-select')]")
+	WebElement languageList;
 
 
-	public void login(String email, String password) {
-		WaitForElementToFinish(alertOverlay);
+	public void login(String email, String password) throws InterruptedException{
+		Thread.sleep(5000);
+		currentLanguage.click();
+		clickDesiredLanguage("English");
+		WaitForHeaderToBeVisible();
 		emailField.sendKeys(email);
 		passwordField.sendKeys(password);
 		loginBtn.click();
 
 	}
-
-	public void WaitForElementToFinish(WebElement element) {
-		WebDriverWait wait = new WebDriverWait(driver, 30);
-		wait.until(ExpectedConditions.invisibilityOf(element));
+	
+	public void findLanguageListOption(List<WebElement> children, String languageName){
+		
+		for(WebElement element : children){
+			if(element.getText().equals(languageName)){
+				element.click();
+			}
+		}
 	}
-
+	
+	public void clickDesiredLanguage(String languageName){
+		
+		List<WebElement> children = languageList.findElements(By.xpath(".//*"));
+		findLanguageListOption(children, languageName);
+	}
+	
+	public void WaitForHeaderToBeVisible(){
+		WebDriverWait wait = new WebDriverWait(driver, 10);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(), 'reinvent learning')]")));
+	}
 }

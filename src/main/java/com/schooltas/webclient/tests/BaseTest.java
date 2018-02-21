@@ -14,12 +14,12 @@ public class BaseTest implements ILoginConstants{
 
 	protected static WebDriver driver;
 	protected HomePage homePage;
-
-	@BeforeTest
-	public final void beforeTest() {
+	
+	@BeforeTest		
+	public final void beforeTest() throws InterruptedException {
 		System.out.println("BeforeTest");
-		System.setProperty("webdriver.chrome.driver", "/Users/dantal/Desktop/chromedriver");
-		//System.setProperty("webdriver.chrome.driver", "C:\\Users\\ccostea\\Documents\\chromedriver.exe");
+		//System.setProperty("webdriver.chrome.driver", "/Users/dantal/Desktop/chromedriver");
+		System.setProperty("webdriver.chrome.driver", "C:\\Users\\ccostea\\Documents\\chromedriver.exe");
 		driver = BrowserFactory.startBrowser("chrome", "https://mijn-test.schooltas.net");
 		ActionUtils.loginAs("publisher");
 		homePage = PageFactory.initElements(driver, HomePage.class);
