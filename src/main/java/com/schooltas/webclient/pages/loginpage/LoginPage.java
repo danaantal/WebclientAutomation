@@ -1,9 +1,8 @@
 package com.schooltas.webclient.pages.loginpage;
 
-import static org.testng.Assert.assertEquals;
+
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -60,6 +59,7 @@ public class LoginPage {
 		for(WebElement element : children){
 			if(element.getText().equals(languageName)){
 				element.click();
+				return;
 			}
 		}
 	}

@@ -7,9 +7,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+
+import com.schooltas.webclient.utils.ActionUtils;
 
 public class NotebookPage {
 	
@@ -17,7 +16,7 @@ public class NotebookPage {
 
 	public NotebookPage(WebDriver driver) {
 		
-		NotebookPage.driver = driver;
+		this.driver = driver;
 	}
 	
 	@FindBy(how = How.CLASS_NAME, using = "button-toggle-schrift")
@@ -36,52 +35,44 @@ public class NotebookPage {
 	WebElement subjectsList;
 			
 	@FindBy(id="button-toggle-favorites")
-	WebElement favouritesButton;
+	WebElement favouritesFilter;
 	
 	@FindBy(how=How.XPATH, using = "(//div[contains(@class,'note existing')])[1]")
 	WebElement noteArea;
 	
 	public void clickAddButton() {
-		
-		NotePage notePage = PageFactory.initElements(driver, NotePage.class);
-		
-		notePage.WaitForElementToBeDisplayed(noteArea);
+				
+		ActionUtils.WaitForElementToBeDisplayed(noteArea);
 		addButton.click(); 
 	}
-	
 	public void expandCollapseNotebook(){
 		
-		WaitForElementToBeDisplayed(noteArea);
+		ActionUtils.WaitForElementToBeDisplayed(noteArea);
 		expandCollapseButton.click();
 	}
 	
 	public void focusNote(){
 		
-		WaitForElementToBeClickable(noteArea);
+		ActionUtils.WaitForElementToBeClickable(noteArea);
 		noteArea.click();
 	}
 	
-	public void searchNote(){
+	public void searchNote(String text){		
 		
-		WaitForElementToBeDisplayed(noteArea);
-		searchTextField.sendKeys("google");
-		WaitForElementToBeDisplayed(noteArea);
+		ActionUtils.WaitForElementToBeDisplayed(noteArea);
+		searchTextField.sendKeys(text);
+		ActionUtils.WaitForElementToBeDisplayed(noteArea);
 	}
 	
 	public void clearSearchField(){
 		
 		searchTextField.clear();
 	}
+	
 	public void expandSubjectList(){
 		
-		WaitForElementToBeClickable(expandSubjectsListButton);
+		ActionUtils.WaitForElementToBeClickable(expandSubjectsListButton);
 		expandSubjectsListButton.click();
-	}
-		
-	public void clickSubjectsListItem(String subjectName){
-		
-		List<WebElement> children = subjectsList.findElements(By.xpath(".//*"));
-		findSubjectsListItem(children, subjectName);
 	}
 	
 	public void findSubjectsListItem(List<WebElement> children, String subjectName){
@@ -89,23 +80,15 @@ public class NotebookPage {
 		for(WebElement element : children){
 			if(element.getText().equals(subjectName)){
 				element.click();
+				return;
 			}
 		}
 	}
 	
-	public void WaitForElementToBeDisplayed(WebElement element) {
-		WebDriverWait wait = new WebDriverWait(driver, 3000);
-		wait.until(ExpectedConditions.visibilityOf(element));
-	}
-	
-	public void WaitForTextToBeDisplayed(WebElement element, String text) {
-		WebDriverWait wait = new WebDriverWait(driver, 3000);
-		wait.until(ExpectedConditions.textToBePresentInElement(element, text));
-	}
-	
-	public void WaitForElementToBeClickable(WebElement element){
-		WebDriverWait wait = new WebDriverWait(driver, 3000);
-		wait.until(ExpectedConditions.elementToBeClickable(element));
+	public void clickSubjectsListItem(String subjectName){
+		
+		List<WebElement> children = subjectsList.findElements(By.xpath(".//*"));
+		findSubjectsListItem(children, subjectName);
 	}
 	
 }

@@ -22,7 +22,7 @@ public class NoteTests extends BaseTest{
 		
 	}
 	
-	@Test
+	@Test(priority = 2)
 	public void createNoteInSubject(){
 		NotebookPage notebookPage = PageFactory.initElements(driver, NotebookPage.class);
 		NotePage notePage = PageFactory.initElements(driver, NotePage.class);
@@ -36,7 +36,7 @@ public class NoteTests extends BaseTest{
 		notePage.checkNoteIsCreated();
 	}
 	
-	@Test(priority = 2)
+	@Test(priority = 3)
 	public void editNote(){
 		NotebookPage notebookPage = PageFactory.initElements(driver, NotebookPage.class);
 		NotePage notePage = PageFactory.initElements(driver, NotePage.class);
@@ -49,7 +49,31 @@ public class NoteTests extends BaseTest{
 		notePage.checkNoteIsEdited();
 	}
 	
-	@Test(priority = 3)
+	@Test(priority = 4)
+	public void searchNote(){
+		NotebookPage notebookPage = PageFactory.initElements(driver, NotebookPage.class);
+		NotePage notePage = PageFactory.initElements(driver, NotePage.class);
+		
+		notebookPage.expandCollapseNotebook();
+		notebookPage.clearSearchField();
+		notebookPage.searchNote("google.ro");
+		notePage.checkNoteIsDisplayedAfterSearch("TEST NOTE\nGoogle");
+		notebookPage.clearSearchField();
+		notebookPage.searchNote("This is Edited");
+		notePage.checkNoteIsDisplayedAfterSearch("This is Edited");			
+	}
+	
+	@Test(priority = 5)
+	public void makeNoteFavourite(){
+		NotebookPage notebookPage = PageFactory.initElements(driver, NotebookPage.class);
+		NotePage notePage = PageFactory.initElements(driver, NotePage.class);
+		
+		notebookPage.expandCollapseNotebook();
+		notebookPage.focusNote();
+		notePage.makeNoteFavourite();		
+	}
+	
+	@Test(priority = 6,invocationCount = 2)
 	public void deleteNote(){
 		NotebookPage notebookPage = PageFactory.initElements(driver, NotebookPage.class);
 		NotePage notePage = PageFactory.initElements(driver, NotePage.class);
@@ -57,16 +81,7 @@ public class NoteTests extends BaseTest{
 		notebookPage.expandCollapseNotebook();
 		notebookPage.focusNote();
 		notePage.deleteNote();
-		notePage.clearSearchField();
+		notebookPage.clearSearchField();
 		notePage.checkNoteIsDeleted();
-	}
-	
-	@Test
-	public void searchNote(){
-		NotebookPage notebookPage = PageFactory.initElements(driver, NotebookPage.class);
-		
-		notebookPage.expandCollapseNotebook();
-		notebookPage.searchNote();
-				
 	}
 }
