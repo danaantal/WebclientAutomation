@@ -1,9 +1,6 @@
 package com.schooltas.webclient.pages.loginpage;
 
-import static org.testng.Assert.assertEquals;
-
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -18,8 +15,8 @@ public class LoginPage {
 	private static WebDriver driver;
 
 	public LoginPage(WebDriver driver) {
-		
-		LoginPage.driver = driver;	
+
+		LoginPage.driver = driver;
 	}
 
 	@FindBy(id = "login-email")
@@ -33,13 +30,13 @@ public class LoginPage {
 
 	@FindBy(how = How.XPATH, using = "//div[@id='alert-popup']")
 	WebElement alertOverlay;
-	
+
 	@FindBy(how = How.XPATH, using = "//*[contains(text(), 'reinvent learning')]")
 	WebElement header;
-	
+
 	@FindBy(how = How.CSS, using = ".current-language")
 	WebElement currentLanguage;
-	
+
 	@FindBy(how = How.XPATH, using = "//div[contains(@class,'language-select')]")
 	WebElement languageList;
 
@@ -54,22 +51,22 @@ public class LoginPage {
 		loginBtn.click();
 
 	}
-	
+
 	public void findLanguageListOption(List<WebElement> children, String languageName){
-		
+
 		for(WebElement element : children){
 			if(element.getText().equals(languageName)){
 				element.click();
 			}
 		}
 	}
-	
+
 	public void clickDesiredLanguage(String languageName){
-		
+
 		List<WebElement> children = languageList.findElements(By.xpath(".//*"));
 		findLanguageListOption(children, languageName);
 	}
-	
+
 	public void WaitForHeaderToBeVisible(){
 		WebDriverWait wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(), 'reinvent learning')]")));
