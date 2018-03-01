@@ -8,11 +8,16 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
+import com.schooltas.webclient.utils.ActionUtils;
 
-public class NotePage extends NotebookPage{
+
+public class NotePage {
 	
+	private static WebDriver driver;
+
 	public NotePage(WebDriver driver) {
-		super(driver);
+		
+		this.driver = driver;
 	}
 	
 	@FindBy(how = How.XPATH, using = "//textarea[@class='body-textarea']")
@@ -20,6 +25,9 @@ public class NotePage extends NotebookPage{
 		
 	@FindBy(how = How.CLASS_NAME, using = "newTag")
 	WebElement tagTextArea;
+	
+	@FindBy(how = How.XPATH, using = "(//div[@class='body'])[1]")
+	public WebElement noteText;
 	
 	@FindBy(how = How.XPATH, using = "(//div[@class='button green button-save createUpdateNote'])[1]")
 	WebElement firstSaveButton;
@@ -45,14 +53,16 @@ public class NotePage extends NotebookPage{
 	@FindBy(how = How.XPATH, using = "(//div[contains(@class,'popout-button-cancel')])[1]")
 	WebElement cancelDeletionButton;
 	
-	@FindBy(how = How.XPATH, using = "(//div[@class='body'])[1]")
-	WebElement noteText;
+	@FindBy(how = How.XPATH, using = "(//div[@class='button-fav'])[1]")
+	WebElement favouriteButton;
+	
+	
 		
 	public void addNoteContent(){
-		WaitForElementToBeDisplayed(noteTextArea);
+		ActionUtils.WaitForElementToBeDisplayed(noteTextArea);
 		noteTextArea.sendKeys("TEST NOTE \n www.google.ro");
 		tagTextArea.sendKeys("Test Tag");
-		addAttachmentButton.sendKeys("E:/DOWNLOADS/book_new.jpg");
+		addAttachmentButton.sendKeys("E:\\book_new.jpg");
 	}
 	
 	public void saveNote(){
@@ -60,7 +70,7 @@ public class NotePage extends NotebookPage{
 	}
 		
 	public void clickEditButton(){
-		WaitForElementToBeClickable(editNoteButton);
+		ActionUtils.WaitForElementToBeClickable(editNoteButton);
 		editNoteButton.click();
 	}
 	
@@ -69,24 +79,33 @@ public class NotePage extends NotebookPage{
 		noteTextArea.sendKeys("This is Edited");
 	}
 	
+	public void makeNoteFavourite(){
+		ActionUtils.WaitForElementToBeClickable(favouriteButton);
+		favouriteButton.click();
+	}
+	
 	public void deleteNote(){
-		WaitForElementToBeClickable(deleteButton);
+		ActionUtils.WaitForElementToBeClickable(deleteButton);
 		deleteButton.click();
 		confirmDeletionButton.click();
 	}
 	
 	public void checkNoteIsCreated(){
-		WaitForTextToBeDisplayed(noteText,"TEST NOTE www.google.ro");
+		ActionUtils.WaitForTextToBeDisplayed(noteText,"TEST NOTE www.google.ro");
 		assertEquals(noteText.getText(),"TEST NOTE www.google.ro");		
 	}
 	public void checkNoteIsEdited(){
-		WaitForTextToBeDisplayed(noteText,"This is Edited");
+		ActionUtils.WaitForTextToBeDisplayed(noteText,"This is Edited");
 		assertEquals(noteText.getText(),"This is Edited");		
 	}
 	
-	public void checkNoteIsDeleted(){
-		WaitForElementToBeDisplayed(noteText);
-		assertNotEquals(noteText.getText(),"This is Edited");
+	public void checkNoteIsDisplayedAfterSearch(String text){
+		ActionUtils.WaitForTextToBeDisplayed(noteText,text);
+		assertEquals(noteText.getText(),text);
 	}
 	
+	public void checkNoteIsDeleted(){
+		ActionUtils.WaitForElementToBeDisplayed(noteText);
+		assertNotEquals(noteText.getText(),"This is Edited");
+	}
 }
