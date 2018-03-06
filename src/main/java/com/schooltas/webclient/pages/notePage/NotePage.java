@@ -3,7 +3,8 @@ package com.schooltas.webclient.pages.notePage;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotEquals;
 
-import org.openqa.selenium.WebDriver;
+import java.util.List;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
@@ -12,14 +13,7 @@ import com.schooltas.webclient.utils.ActionUtils;
 
 
 public class NotePage {
-	
-	private static WebDriver driver;
-
-	public NotePage(WebDriver driver) {
 		
-		this.driver = driver;
-	}
-	
 	@FindBy(how = How.XPATH, using = "//textarea[@class='body-textarea']")
 	WebElement noteTextArea;
 		
@@ -29,8 +23,8 @@ public class NotePage {
 	@FindBy(how = How.XPATH, using = "(//div[@class='body'])[1]")
 	public WebElement noteText;
 	
-	@FindBy(how = How.XPATH, using = "(//div[@class='button green button-save createUpdateNote'])[1]")
-	WebElement firstSaveButton;
+	@FindBy(how = How.CSS, using = "div.button.green.button-save.createUpdateNote")
+	List<WebElement> firstSaveButton;
 	
 	@FindBy(how = How.XPATH, using = "(//div[contains(@class,'edit')])[1]")
 	WebElement firstCancelButton;
@@ -66,7 +60,7 @@ public class NotePage {
 	}
 	
 	public void saveNote(){
-		firstSaveButton.click();
+		firstSaveButton.get(0).click();
 	}
 		
 	public void clickEditButton(){
