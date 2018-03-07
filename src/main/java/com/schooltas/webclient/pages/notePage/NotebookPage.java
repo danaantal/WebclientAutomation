@@ -11,6 +11,7 @@ import com.schooltas.webclient.utils.ActionUtils;
 
 public class NotebookPage {
 
+<<<<<<< Updated upstream
 	@FindBy(how = How.CSS, using = ".button-toggle-schrift")
 	WebElement expandCollapseButton;
 	
@@ -83,4 +84,78 @@ public class NotebookPage {
 		findSubjectsListItem(children, subjectName);
 	}
 	
+=======
+    @FindBy(how = How.CLASS_NAME, using = "button-toggle-schrift")
+    WebElement expandCollapseButton;
+
+    @FindBy(how = How.CSS, using = "#button-new")
+    WebElement addButton;
+
+    @FindBy(id="filter")
+    WebElement searchTextField;
+
+    @FindBy(how = How.XPATH, using = "//div[@id='schrift-course']")
+    WebElement expandSubjectsListButton;
+
+    @FindBy(how = How.XPATH, using = "(//div[@class='viewport'])")
+    WebElement subjectsList;
+
+    @FindBy(id="button-toggle-favorites")
+    WebElement favouritesFilter;
+
+    @FindBy(how=How.XPATH, using = "(//div[contains(@class,'note existing')])[1]")
+    WebElement noteArea;
+
+    public void clickAddButton() {
+
+        ActionUtils.WaitForElementToBeDisplayed(noteArea);
+        addButton.click();
+    }
+    public void expandCollapseNotebook(){
+
+        ActionUtils.WaitForElementToBeDisplayed(noteArea);
+        expandCollapseButton.click();
+    }
+
+    public void focusNote(){
+
+        ActionUtils.WaitForElementToBeClickable(noteArea);
+        noteArea.click();
+    }
+
+    public void searchNote(String text){
+
+        ActionUtils.WaitForElementToBeDisplayed(noteArea);
+        searchTextField.sendKeys(text);
+        ActionUtils.WaitForElementToBeDisplayed(noteArea);
+    }
+
+    public void clearSearchField(){
+
+        searchTextField.clear();
+    }
+
+    public void expandSubjectList(){
+
+        ActionUtils.WaitForElementToBeClickable(expandSubjectsListButton);
+        expandSubjectsListButton.click();
+    }
+
+    public void findSubjectsListItem(List<WebElement> children, String subjectName){
+
+        for(WebElement element : children){
+            if(element.getText().equals(subjectName)){
+                element.click();
+                return;
+            }
+        }
+    }
+
+    public void clickSubjectsListItem(String subjectName){
+
+        List<WebElement> children = subjectsList.findElements(By.xpath(".//*"));
+        findSubjectsListItem(children, subjectName);
+    }
+
+>>>>>>> Stashed changes
 }
