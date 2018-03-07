@@ -44,7 +44,7 @@ public class LoginPage {
 
 
 	public void login(String email, String password) throws InterruptedException{
-		Thread.sleep(5000);
+		Thread.sleep(7000);
 		currentLanguage.click();
 		clickDesiredLanguage("English");
 		WaitForHeaderToBeVisible();

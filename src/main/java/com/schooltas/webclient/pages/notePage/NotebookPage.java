@@ -11,7 +11,7 @@ import com.schooltas.webclient.utils.ActionUtils;
 
 public class NotebookPage {
 
-	@FindBy(how = How.CLASS_NAME, using = "button-toggle-schrift")
+	@FindBy(how = How.CSS, using = ".button-toggle-schrift")
 	WebElement expandCollapseButton;
 	
 	@FindBy(how = How.CSS, using = "#button-new")
@@ -20,16 +20,16 @@ public class NotebookPage {
 	@FindBy(id="filter")
 	WebElement searchTextField;
 	
-	@FindBy(how = How.XPATH, using = "//div[@id='schrift-course']")
+	@FindBy(id="schrift-course")
 	WebElement expandSubjectsListButton;
 	
-	@FindBy(how = How.XPATH, using = "(//div[@class='viewport'])")
+	@FindBy(how = How.CSS, using = ".viewport")
 	WebElement subjectsList;
 			
 	@FindBy(id="button-toggle-favorites")
 	WebElement favouritesFilter;
 	
-	@FindBy(how=How.XPATH, using = "(//div[contains(@class,'note existing')])[1]")
+	@FindBy(how=How.CSS, using = ".existingNote")
 	WebElement noteArea;
 	
 	public void clickAddButton() {

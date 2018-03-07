@@ -57,9 +57,11 @@ public class NoteTests extends BaseTest{
 		notebookPage.expandCollapseNotebook();
 		notebookPage.clearSearchField();
 		notebookPage.searchNote("google.ro");
+		//notebookPage.focusNote();
 		notePage.checkNoteIsDisplayedAfterSearch("TEST NOTE\nGoogle");
 		notebookPage.clearSearchField();
 		notebookPage.searchNote("This is Edited");
+		//notebookPage.focusNote();
 		notePage.checkNoteIsDisplayedAfterSearch("This is Edited");			
 	}
 	
