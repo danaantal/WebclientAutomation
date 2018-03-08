@@ -56,12 +56,10 @@ public class NoteTests extends BaseTest{
 		
 		notebookPage.expandCollapseNotebook();
 		notebookPage.clearSearchField();
-		notebookPage.searchNote("google.ro");
-		//notebookPage.focusNote();
+		notebookPage.searchNote("google.ro");	
 		notePage.checkNoteIsDisplayedAfterSearch("TEST NOTE\nGoogle");
 		notebookPage.clearSearchField();
 		notebookPage.searchNote("This is Edited");
-		//notebookPage.focusNote();
 		notePage.checkNoteIsDisplayedAfterSearch("This is Edited");			
 	}
 	
@@ -75,15 +73,14 @@ public class NoteTests extends BaseTest{
 		notePage.makeNoteFavourite();		
 	}
 	
-	@Test(priority = 6,invocationCount = 2)
+	@Test(priority = 6)  //invocationCount = 2
 	public void deleteNote(){
 		NotebookPage notebookPage = PageFactory.initElements(driver, NotebookPage.class);
 		NotePage notePage = PageFactory.initElements(driver, NotePage.class);
 		
 		notebookPage.expandCollapseNotebook();
 		notebookPage.focusNote();
-		notePage.deleteNote();
-		notebookPage.clearSearchField();
-		notePage.checkNoteIsDeleted();
+		notePage.deleteNote();	
+		//notePage.checkNoteIsDeleted();
 	}
 }

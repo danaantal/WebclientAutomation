@@ -24,18 +24,17 @@ public class ActionUtils extends BaseTest{
 	}
 	
 	public static void WaitForElementToBeDisplayed(WebElement element) {
-		WebDriverWait wait = new WebDriverWait(driver, 30);
+		WebDriverWait wait = new WebDriverWait(driver, 5);
 		wait.until(ExpectedConditions.visibilityOf(element));
 	}
 	
 	public static void WaitForTextToBeDisplayed(WebElement element, String text) {
-		WebDriverWait wait = new WebDriverWait(driver, 30);
+		WebDriverWait wait = new WebDriverWait(driver, 5);
 		wait.until(ExpectedConditions.textToBePresentInElement(element, text));
 	}
 	
 	public static void WaitForElementToBeClickable(WebElement element){
-		WebDriverWait wait = new WebDriverWait(driver, 30);
+		WebDriverWait wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.elementToBeClickable(element));
 	}
-
 }

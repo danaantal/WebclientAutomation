@@ -53,7 +53,7 @@ public class NotebookPage {
 		
 		ActionUtils.WaitForElementToBeDisplayed(noteArea);
 		searchTextField.sendKeys(text);
-		ActionUtils.WaitForElementToBeDisplayed(noteArea);
+		ActionUtils.WaitForElementToBeClickable(noteArea);
 	}
 	
 	public void clearSearchField(){

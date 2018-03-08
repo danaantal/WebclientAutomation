@@ -27,19 +27,19 @@ public class LoginPage {
 	@FindBy(id = "login-password")
 	WebElement passwordField;
 
-	@FindBy(how = How.XPATH, using = "//div[@id='logins']")
+	@FindBy(id = "logins")
 	WebElement loginBtn;
 
-	@FindBy(how = How.XPATH, using = "//div[@id='alert-popup']")
+	@FindBy(id = "percentageLoader")
 	WebElement alertOverlay;
 	
-	@FindBy(how = How.XPATH, using = "//*[contains(text(), 'reinvent learning')]")
+	@FindBy(how = How.CSS, using = "[lang-ref='BSSchooltasSlogan']")
 	WebElement header;
 	
 	@FindBy(how = How.CSS, using = ".current-language")
 	WebElement currentLanguage;
 	
-	@FindBy(how = How.XPATH, using = "//div[contains(@class,'language-select')]")
+	@FindBy(how = How.CSS, using = ".language-select")
 	WebElement languageList;
 
 
