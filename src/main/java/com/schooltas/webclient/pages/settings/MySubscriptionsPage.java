@@ -1,4 +1,4 @@
-package com.schooltas.webclient.page.Settings;
+package com.schooltas.webclient.pages.settings;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
