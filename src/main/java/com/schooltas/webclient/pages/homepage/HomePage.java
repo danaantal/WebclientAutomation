@@ -14,7 +14,6 @@ import com.schooltas.webclient.utils.ActionUtils;
 
 public class HomePage {
 
-
     @FindBy(how = How.CSS, using = "#welcome-header .gear")
     WebElement showUserMenuButton;
 
@@ -30,56 +29,56 @@ public class HomePage {
     @FindBy(id = "user-name")
     WebElement userNameText;
 
-    public void showUserMenu(){
+    public void showUserMenu() {
 
-        ActionUtils.WaitForElementToBeDisplayed(showUserMenuButton);
+        ActionUtils.waitForElementToBeDisplayed(showUserMenuButton);
         showUserMenuButton.click();
     }
 
-    public void findUserMenuOptions(List<WebElement> children, String menuOptionName){
+    public void findUserMenuOptions(List<WebElement> children, String menuOptionName) {
 
-        for(WebElement element : children){
-            if(element.getText().equals(menuOptionName)){
+        for (WebElement element : children) {
+            if (element.getText().equals(menuOptionName)) {
                 element.click();
                 return;
             }
         }
     }
 
-    public void clickUserMenuOption(String menuOptionName){
+    public void clickUserMenuOption(String menuOptionName) {
         List<WebElement> children = listUserMenuOptions.findElements(By.xpath(".//*"));
         findUserMenuOptions(children, menuOptionName);
     }
 
-    public void waitCoursesToLoad(){
-        ActionUtils.WaitForElementToBeClickable(homepageCoursesListItem);
+    public void waitCoursesToLoad() {
+        ActionUtils.waitForElementToBeClickable(homepageCoursesListItem);
     }
 
-    public boolean findHomepageCoursesList(String courseName){
+    public boolean findHomepageCoursesList(String courseName) {
         List<WebElement> courses = homepageCoursesList.findElements(By.xpath(".//*"));
-        for(WebElement element : courses){
-            if(element.getText().equals(courseName)){
+        for (WebElement element : courses) {
+            if (element.getText().equals(courseName)) {
                 return true;
             }
         }
         return false;
     }
 
-    public void clickHomepageCourseItem(String courseName){
+    public void clickHomepageCourseItem(String courseName) {
         List<WebElement> courses = homepageCoursesList.findElements(By.xpath(".//*"));
-        for(WebElement element : courses){
-            if(element.getText().equals(courseName)){
+        for (WebElement element : courses) {
+            if (element.getText().equals(courseName)) {
                 element.click();
                 return;
             }
         }
     }
 
-    public void checkIfTheCourseIsHidden(String courseName){
+    public void checkIfTheCourseIsHidden(String courseName) {
         assertFalse(findHomepageCoursesList(courseName));
     }
 
-    public void checkIfTheCourseIsDisplayed(String courseName){
+    public void checkIfTheCourseIsDisplayed(String courseName) {
         assertTrue(findHomepageCoursesList(courseName));
     }
 }

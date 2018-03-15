@@ -32,13 +32,13 @@ public class MyCoursesPage {
     }
 
     public void clickCourse(String courseName) {
-        ActionUtils.WaitForElementToBeClickable(coursesList);
+        ActionUtils.waitForElementToBeClickable(coursesList);
         List<WebElement> children = coursesList.findElements(By.xpath(".//*"));
         findCoursesList(children, courseName);
     }
 
     public void closeWindow() {
-        ActionUtils.WaitForElementToBeClickable(doneButton);
+        ActionUtils.waitForElementToBeClickable(doneButton);
         doneButton.click();
     }
 

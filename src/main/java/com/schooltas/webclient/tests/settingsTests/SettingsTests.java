@@ -12,18 +12,17 @@ import com.schooltas.webclient.pages.settings.MyCoursesPage;
 import com.schooltas.webclient.pages.settings.MySubscriptionsPage;
 import com.schooltas.webclient.tests.BaseTest;
 
-
 public class SettingsTests extends BaseTest {
 
     private HomePage homepage;
 
     @BeforeClass
-    public void init(){
+    public void init() {
         homepage = PageFactory.initElements(driver, HomePage.class);
     }
 
     @Test
-    public void addLicense(){
+    public void addLicense() {
 
         MyBundlesPage myBundlePage = PageFactory.initElements(driver, MyBundlesPage.class);
 
@@ -35,7 +34,7 @@ public class SettingsTests extends BaseTest {
     }
 
     @Test
-    public void addSubscription(){
+    public void addSubscription() {
         MySubscriptionsPage mySubscriptionsPage = PageFactory.initElements(driver, MySubscriptionsPage.class);
 
         homepage.showUserMenu();
@@ -46,7 +45,7 @@ public class SettingsTests extends BaseTest {
     }
 
     @Test
-    public void changeAvatar(){
+    public void changeAvatar() {
         MyAccountPage myAccountPage = PageFactory.initElements(driver, MyAccountPage.class);
 
         homepage.showUserMenu();
@@ -57,7 +56,7 @@ public class SettingsTests extends BaseTest {
     }
 
     @Test
-    public void changeName(){
+    public void changeName() {
         MyAccountPage myAccountPage = PageFactory.initElements(driver, MyAccountPage.class);
 
         homepage.showUserMenu();
@@ -71,7 +70,7 @@ public class SettingsTests extends BaseTest {
     }
 
     @Test
-    public void changePassword(){
+    public void changePassword() {
 
         MyAccountPage myAccountPage = PageFactory.initElements(driver, MyAccountPage.class);
 
@@ -86,7 +85,7 @@ public class SettingsTests extends BaseTest {
     }
 
     @Test
-    public void hideCourse(){
+    public void hideCourse() {
 
         MyCoursesPage myCoursesPage = PageFactory.initElements(driver, MyCoursesPage.class);
 
@@ -103,7 +102,7 @@ public class SettingsTests extends BaseTest {
     }
 
     @Test
-    public void showCourse(){
+    public void showCourse() {
 
         MyCoursesPage myCoursesPage = PageFactory.initElements(driver, MyCoursesPage.class);
 
@@ -119,7 +118,7 @@ public class SettingsTests extends BaseTest {
     }
 
     @Test
-    public void changeLanguage(){
+    public void changeLanguage() {
 
         LanguagePage languagePage = PageFactory.initElements(driver, LanguagePage.class);
 

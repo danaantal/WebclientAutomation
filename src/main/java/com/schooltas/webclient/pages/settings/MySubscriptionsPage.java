@@ -24,15 +24,15 @@ public class MySubscriptionsPage {
     WebElement okErrorButton;
 
     public void addSubscription(String subscriptionCode) {
-        ActionUtils.WaitForElementToBeDisplayed(subscriptionCodeInputField);
+        ActionUtils.waitForElementToBeDisplayed(subscriptionCodeInputField);
         subscriptionCodeInputField.sendKeys(subscriptionCode);
         addButton.click();
-        ActionUtils.WaitForElementToBeDisplayed(okErrorButton);
+        ActionUtils.waitForElementToBeDisplayed(okErrorButton);
         okErrorButton.click();
     }
 
     public void closeWindow() {
-        ActionUtils.WaitForElementToBeClickable(doneButton);
+        ActionUtils.waitForElementToBeClickable(doneButton);
         doneButton.click();
     }
 }

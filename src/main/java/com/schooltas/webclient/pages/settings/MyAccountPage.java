@@ -15,7 +15,7 @@ public class MyAccountPage {
     @FindBy(how = How.CSS, using = "#popover-screen-profile [type='submit']")
     WebElement doneButton;
 
-    @FindBy(id="file-avatar")
+    @FindBy(id = "file-avatar")
     WebElement changeAvatarButton;
 
     @FindBy(how = How.CSS, using = "#profiel-naam-display")
@@ -27,29 +27,31 @@ public class MyAccountPage {
     @FindBy(how = How.CSS, using = "#popover-screen-name button")
     WebElement backToMyAccountButton;
 
-    @FindBy(id="change-firstname")
+    @FindBy(id = "change-firstname")
     WebElement firstNameInputField;
 
-    @FindBy(id="change-lastname")
+    @FindBy(id = "change-lastname")
     WebElement lastNameInputField;
 
-    /*@FindBy(how = How.CSS, using = "#form-changename .st-submit")
-    WebElement saveNameButton;
+    /*
+     * @FindBy(how = How.CSS, using = "#form-changename .st-submit")
+     * WebElement saveNameButton;
+     *
+     * @FindBy(how = How.CSS, using = "#form-changepassword .st-submit")
+     * WebElement savePasswordButton;
+     */
 
-    @FindBy(how = How.CSS, using = "#form-changepassword .st-submit")
-    WebElement savePasswordButton;*/
-
-    //you can use:
+    // you can use:
     @FindBy(how = How.CSS, using = "input.st-submit.button.full.green")
     private List<WebElement> saveButtons;
 
-    @FindBy(id="current-password")
+    @FindBy(id = "current-password")
     WebElement currentPasswordInputField;
 
-    @FindBy(id="new-password1")
+    @FindBy(id = "new-password1")
     WebElement newPasswordInputField;
 
-    @FindBy(id="new-password2")
+    @FindBy(id = "new-password2")
     WebElement repeatPasswordInputField;
 
     @FindBy(how = How.CSS, using = "#popover-screen-ok .header")
@@ -58,47 +60,47 @@ public class MyAccountPage {
     @FindBy(how = How.XPATH, using = "//div[@id='popover-screen-ok']/button[@type='button']")
     WebElement backToMyAccountAfterPasswordChangeButton;
 
-    public void changeAvatar(){
+    public void changeAvatar() {
         changeAvatarButton.sendKeys("E:\\book_new.jpg");
     }
 
-    public void changeName(String firstName, String lastName){
-        ActionUtils.WaitForElementToBeDisplayed(changeNameButton);
+    public void changeName(String firstName, String lastName) {
+        ActionUtils.waitForElementToBeDisplayed(changeNameButton);
         changeNameButton.click();
         firstNameInputField.clear();
         firstNameInputField.sendKeys(firstName);
         lastNameInputField.clear();
         lastNameInputField.sendKeys(lastName);
-        //saveNameButton.click();
+        // saveNameButton.click();
     }
 
     // ^ split the method above into 3 different methods: change FN, change LN, Save
 
-    public void changePassword(String currentPassword, String newPassword){
-        ActionUtils.WaitForElementToBeDisplayed(changePasswordButton);
+    public void changePassword(String currentPassword, String newPassword) {
+        ActionUtils.waitForElementToBeDisplayed(changePasswordButton);
         changePasswordButton.click();
         currentPasswordInputField.sendKeys(currentPassword);
         newPasswordInputField.sendKeys(newPassword);
         repeatPasswordInputField.sendKeys(newPassword);
-        //savePasswordButton.click();
+        // savePasswordButton.click();
     }
 
-    //have a single method that can be used for change name and change pass
+    // have a single method that can be used for change name and change pass
 
-    public void closeWindow(){
-        ActionUtils.WaitForElementToBeClickable(doneButton);
+    public void closeWindow() {
+        ActionUtils.waitForElementToBeClickable(doneButton);
         doneButton.click();
     }
 
-    public void checkIfNameIsChanged(String firstName, String lastName){
-        ActionUtils.WaitForElementToBeDisplayed(changeNameButton);
+    public void checkIfNameIsChanged(String firstName, String lastName) {
+        ActionUtils.waitForElementToBeDisplayed(changeNameButton);
         assertEquals(changeNameButton.getText(), firstName.concat(" " + lastName));
     }
 
-    public void checkIfPasswordIsChanged(){
-        ActionUtils.WaitForElementToBeDisplayed(passwordChangeConfirmationMessage);
+    public void checkIfPasswordIsChanged() {
+        ActionUtils.waitForElementToBeDisplayed(passwordChangeConfirmationMessage);
         assertEquals(passwordChangeConfirmationMessage.getText(), "Your password has been changed.");
-        ActionUtils.WaitForElementToBeClickable(backToMyAccountAfterPasswordChangeButton);
+        ActionUtils.waitForElementToBeClickable(backToMyAccountAfterPasswordChangeButton);
         backToMyAccountAfterPasswordChangeButton.click();
     }
 }

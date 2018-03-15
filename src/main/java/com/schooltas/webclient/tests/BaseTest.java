@@ -8,23 +8,23 @@ import com.schooltas.webclient.utils.ActionUtils;
 import com.schooltas.webclient.utils.BrowserFactory;
 import com.schooltas.webclient.utils.ILoginConstants;
 
-public class BaseTest implements ILoginConstants{
+public class BaseTest implements ILoginConstants {
 
-	protected static WebDriver driver;
+    protected static WebDriver driver;
 
-	@BeforeTest		
-	public final void beforeTest() throws InterruptedException {
-		System.out.println("BeforeTest");
-		//System.setProperty("webdriver.chrome.driver", "/Users/dantal/Desktop/chromedriver");
-		System.setProperty("webdriver.chrome.driver", "C:\\Users\\ccostea\\Documents\\chromedriver.exe");
-		driver = BrowserFactory.startBrowser("chrome", "https://mijn-test.schooltas.net");
-		ActionUtils.loginAs("publisher");
-	}
+    @BeforeTest
+    public final void beforeTest() throws InterruptedException {
+        System.out.println("BeforeTest");
+        // System.setProperty("webdriver.chrome.driver", "/Users/dantal/Desktop/chromedriver");
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\ccostea\\Documents\\chromedriver.exe");
+        driver = BrowserFactory.startBrowser("chrome", "https://mijn-test.schooltas.net");
+        ActionUtils.loginAs("publisher");
+    }
 
-	@AfterTest
-	public final void afterTest() throws InterruptedException{
-		// Close the instance of browser
-		Thread.sleep(1000);
-		driver.quit();
-	}
+    @AfterTest
+    public final void afterTest() throws InterruptedException {
+        // Close the instance of browser
+        Thread.sleep(1000);
+        driver.quit();
+    }
 }

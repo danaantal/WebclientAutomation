@@ -42,7 +42,7 @@ public class LanguagePage {
     }
 
     public void clickLanguage(String languageName) {
-        ActionUtils.WaitForElementToBeClickable(listOfAvailableLanguages);
+        ActionUtils.waitForElementToBeClickable(listOfAvailableLanguages);
         List<WebElement> children = listOfAvailableLanguages.findElements(By.xpath(".//*"));
         findLanguagesList(children, languageName);
     }
