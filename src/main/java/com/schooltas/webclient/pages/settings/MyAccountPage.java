@@ -1,4 +1,4 @@
-package com.schooltas.webclient.page.Settings;
+package com.schooltas.webclient.pages.settings;
 
 import static org.testng.Assert.assertEquals;
 
