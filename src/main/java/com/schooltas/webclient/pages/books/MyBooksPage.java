@@ -11,65 +11,70 @@ import com.schooltas.webclient.utils.ActionUtils;
 
 public class MyBooksPage {
 
-    // private final WebDriver driver;
-    //
-    // public MyBooksPage(WebDriver driver){
-    // this.driver = driver;
-    // }
+	// private final WebDriver driver;
+	//
+	// public MyBooksPage(WebDriver driver){
+	// this.driver = driver;
+	// }
 
-    @FindBy(id = "books")
-    WebElement listOfBooks;
+	@FindBy(id = "books")
+	private WebElement listOfBooks;
 
-    @FindBy(how = How.CSS, using = "#book-list-filter [type]")
-    WebElement filterBooksInputField;
+	@FindBy(how = How.CSS, using = "#book-list-filter [type]")
+	private WebElement filterBooksInputField;
 
-    @FindBy(id = "#books-edit-start")
-    WebElement editBooksListButton;
+	@FindBy(id = "#books-edit-start")
+	private WebElement editBooksListButton;
 
-    @FindBy(id = "books-edit-end")
-    WebElement doneButton;
+	@FindBy(id = "books-edit-end")
+	private WebElement doneButton;
 
-    @FindBy(how = How.CSS, using = ".book-hide")
-    List<WebElement> hideOrShowBookButton;
+	@FindBy(how = How.CSS, using = ".book-hide")
+	private List<WebElement> hideOrShowBookButton;
 
-    @FindBy(how = How.CSS, using = ".book-download")
-    List<WebElement> downloadBookButton;
+	@FindBy(how = How.CSS, using = ".book-download")
+	private List<WebElement> downloadBookButton;
 
-    @FindBy(how = How.CSS, using = ".book-stored")
-    List<WebElement> bookDownloadedLabel;
+	@FindBy(how = How.CSS, using = ".book-stored")
+	private List<WebElement> bookDownloadedLabel;
 
-    public void findBooksList(List<WebElement> children, String bookName) {
+	private void findBooksList(List<WebElement> children, String bookName) {
 
-        for (WebElement element : children) {
-            if (element.getText().equals(bookName)) {
-                element.click();
-                return;
-            }
-        }
-    }
+		for (WebElement element : children) {
+			if (element.getText().equals(bookName)) {
+				element.click();
+				return;
+			}
+		}
+	}
 
-    public void clickBook(String bookName) {
-        List<WebElement> children = listOfBooks.findElements(By.xpath(".//*"));
-        findBooksList(children, bookName);
-    }
+	public void clickBook(String bookName) {
 
-    public void searchBook(String searchTerm) {
-        filterBooksInputField.clear();
-        filterBooksInputField.sendKeys(searchTerm);
-    }
+		List<WebElement> children = listOfBooks.findElements(By.xpath(".//*"));
+		findBooksList(children, bookName);
+	}
 
-    public void clearSearchField() {
-        ActionUtils.waitForElementToBeDisplayed(filterBooksInputField);
-        filterBooksInputField.clear();
-    }
+	public void searchBook(String searchTerm) {
+		
+		filterBooksInputField.clear();
+		filterBooksInputField.sendKeys(searchTerm);
+	}
 
-    public void downloadBook() {
-        ActionUtils.waitForElementToBeDisplayed(downloadBookButton.get(0));
-        downloadBookButton.get(0).click();
-    }
+	public void clearSearchField() {
+		
+		ActionUtils.waitForElementToBeDisplayed(filterBooksInputField);
+		filterBooksInputField.clear();
+	}
 
-    public void checkBookIsDownloaded() {
-        ActionUtils.waitForElementToBeDisplayed(bookDownloadedLabel.get(0));
-    }
+	public void downloadBook() {
+		
+		ActionUtils.waitForElementToBeDisplayed(downloadBookButton.get(0));
+		downloadBookButton.get(0).click();
+	}
+
+	public void checkBookIsDownloaded() {
+		
+		ActionUtils.waitForElementToBeDisplayed(bookDownloadedLabel.get(0));
+	}
 
 }

@@ -9,33 +9,41 @@ import com.schooltas.webclient.utils.ActionUtils;
 public class MyBundlesPage {
 
     @FindBy(how = How.CSS, using = "#popover-screen-bundles button")
-    WebElement doneButton;
+    private WebElement doneButton;
 
     @FindBy(how = How.CSS, using = "#popover-screen-bundles .inside-scroll")
-    WebElement listOfLicenses;
+    private WebElement listOfLicenses;
 
     @FindBy(id = "new-bundlecode")
-    WebElement licenseCodeInputField;
+    private WebElement licenseCodeInputField;
 
     @FindBy(how = How.CSS, using = "#form-addbundle .st-submit")
-    WebElement addButton;
+    private WebElement addButton;
 
     @FindBy(how = How.CSS, using = "#alert-popup .white:nth-of-type(4)")
-    WebElement okErrorButton;
+    private WebElement okErrorButton;
 
     // demo license button and screen??
 
     public void addLicense(String licenseCode) {
+    	
         ActionUtils.waitForElementToBeDisplayed(licenseCodeInputField);
+        
         licenseCodeInputField.sendKeys(licenseCode);
+        
         addButton.click();
-        ActionUtils.waitForElementToBeDisplayed(okErrorButton);
-        okErrorButton.click();
+        
+        
     }
-
-    // ^ split the method above into 2 different methods: add license and click ok in error popup
+    
+    public void clickOkErrorButton(){
+    	
+    	ActionUtils.waitForElementToBeDisplayed(okErrorButton);
+        okErrorButton.click();
+    } 
 
     public void closeWindow() {
+    	
         ActionUtils.waitForElementToBeClickable(doneButton);
         doneButton.click();
     }

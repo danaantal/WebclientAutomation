@@ -9,29 +9,33 @@ import com.schooltas.webclient.utils.ActionUtils;
 public class MySubscriptionsPage {
 
     @FindBy(how = How.CSS, using = "#popover-screen-subscriptions [type='button']")
-    WebElement doneButton;
+    private WebElement doneButton;
 
     @FindBy(how = How.CSS, using = "#popover-screen-subscriptions .subscription-list")
-    WebElement listOfSubscriptions;
+    private WebElement listOfSubscriptions;
 
     @FindBy(id = "new-subscriptioncode")
-    WebElement subscriptionCodeInputField;
+    private WebElement subscriptionCodeInputField;
 
     @FindBy(how = How.CSS, using = "#form-addsubscription button")
-    WebElement addButton;
+    private WebElement addButton;
 
     @FindBy(how = How.CSS, using = "#alert-popup .white:nth-of-type(4)")
-    WebElement okErrorButton;
+    private WebElement okErrorButton;
 
     public void addSubscription(String subscriptionCode) {
+    	
         ActionUtils.waitForElementToBeDisplayed(subscriptionCodeInputField);
         subscriptionCodeInputField.sendKeys(subscriptionCode);
+        
         addButton.click();
+        
         ActionUtils.waitForElementToBeDisplayed(okErrorButton);
         okErrorButton.click();
     }
 
     public void closeWindow() {
+    	
         ActionUtils.waitForElementToBeClickable(doneButton);
         doneButton.click();
     }

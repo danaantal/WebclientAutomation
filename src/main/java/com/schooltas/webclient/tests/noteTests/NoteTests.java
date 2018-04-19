@@ -1,86 +1,96 @@
 package com.schooltas.webclient.tests.noteTests;
 
-
-
 import org.openqa.selenium.support.PageFactory;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import com.schooltas.webclient.pages.notePage.NotePage;
 import com.schooltas.webclient.pages.notePage.NotebookPage;
 import com.schooltas.webclient.tests.BaseTest;
+import com.schooltas.webclient.utils.ActionUtils;
 
 public class NoteTests extends BaseTest{
 
+	public static NotebookPage notebookPage;
+	public static NotePage notePage;
+	
+	@BeforeClass
+	public static void initTemplates(){
+		notebookPage = PageFactory.initElements(driver, NotebookPage.class);
+		notePage = PageFactory.initElements(driver, NotePage.class);
+	}
+	
+	
 	@Test(priority = 1)
 	public void createNewNote(){
-		NotebookPage notebookPage = PageFactory.initElements(driver, NotebookPage.class);
-		NotePage notePage = PageFactory.initElements(driver, NotePage.class);
-
 		notebookPage.clickAddButton();
+		
 		notePage.addNoteContent();
+		
 		notePage.saveNote();
+		
 		notePage.checkNoteIsCreated();
 		
 	}
 	
 	@Test(priority = 2)
 	public void createNoteInSubject(){
-		NotebookPage notebookPage = PageFactory.initElements(driver, NotebookPage.class);
-		NotePage notePage = PageFactory.initElements(driver, NotePage.class);
+		//notebookPage.expandCollapseNotebook();
 		
-		notebookPage.expandCollapseNotebook();
 		notebookPage.expandSubjectList();
 		notebookPage.clickSubjectsListItem("English");
+		
 		notebookPage.clickAddButton();
+		
 		notePage.addNoteContent();
 		notePage.saveNote();
 		notePage.checkNoteIsCreated();
 	}
 	
 	@Test(priority = 3)
-	public void editNote(){
-		NotebookPage notebookPage = PageFactory.initElements(driver, NotebookPage.class);
-		NotePage notePage = PageFactory.initElements(driver, NotePage.class);
+	public void editNote() throws InterruptedException{
+		//notebookPage.expandCollapseNotebook();
 		
-		notebookPage.expandCollapseNotebook();
+		Thread.sleep(1000);
+		
+		notebookPage.expandSubjectList();
+		notebookPage.clickSubjectsListItem("Everything");
+		
 		notebookPage.focusNote();
 		notePage.clickEditButton();
+		
 		notePage.changeNoteContent();
 		notePage.saveNote();
 		notePage.checkNoteIsEdited();
 	}
 	
 	@Test(priority = 4)
-	public void searchNote(){
-		NotebookPage notebookPage = PageFactory.initElements(driver, NotebookPage.class);
-		NotePage notePage = PageFactory.initElements(driver, NotePage.class);
-		
-		notebookPage.expandCollapseNotebook();
-		notebookPage.clearSearchField();
-		notebookPage.searchNote("google.ro");	
-		notePage.checkNoteIsDisplayedAfterSearch("TEST NOTE\nGoogle");
-		notebookPage.clearSearchField();
-		notebookPage.searchNote("This is Edited");
-		notePage.checkNoteIsDisplayedAfterSearch("This is Edited");			
+	public void makeNoteFavourite(){
+		ActionUtils.waitForElementToBeDisplayed(notePage.noteText.get(0));
+		notePage.makeNoteFavourite();	
 	}
 	
 	@Test(priority = 5)
-	public void makeNoteFavourite(){
-		NotebookPage notebookPage = PageFactory.initElements(driver, NotebookPage.class);
-		NotePage notePage = PageFactory.initElements(driver, NotePage.class);
+	public void searchAndDeleteNote() throws InterruptedException{
+		//notebookPage.expandCollapseNotebook();
 		
-		notebookPage.expandCollapseNotebook();
-		notebookPage.focusNote();
-		notePage.makeNoteFavourite();		
-	}
-	
-	@Test(priority = 6)  //invocationCount = 2
-	public void deleteNote(){
-		NotebookPage notebookPage = PageFactory.initElements(driver, NotebookPage.class);
-		NotePage notePage = PageFactory.initElements(driver, NotePage.class);
+		notebookPage.searchNote("Delete");
+		Thread.sleep(1000);
+		notePage.checkNoteIsDisplayedAfterSearch("Test note Search&Delete");
 		
-		notebookPage.expandCollapseNotebook();
 		notebookPage.focusNote();
-		notePage.deleteNote();	
-		//notePage.checkNoteIsDeleted();
+		notePage.deleteNote();
+		notePage.checkNoteIsDeleted();
+				
+		notebookPage.clearSearchField();
+		
+		notebookPage.searchNote("This is Edited");
+		Thread.sleep(1000);
+		notePage.checkNoteIsDisplayedAfterSearch("This is Edited");
+
+		//notebookPage.focusNote();
+		notePage.deleteNote();
+		notePage.checkNoteIsDeleted();
+		
+		notebookPage.clearSearchField();
 	}
 }

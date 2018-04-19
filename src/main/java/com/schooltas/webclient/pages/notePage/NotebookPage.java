@@ -6,31 +6,32 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+import org.openqa.selenium.Keys;
 
 import com.schooltas.webclient.utils.ActionUtils;
 
 public class NotebookPage {
 
     @FindBy(how = How.CSS, using = ".button-toggle-schrift")
-    WebElement expandCollapseButton;
+    private WebElement expandCollapseButton;
 
     @FindBy(how = How.CSS, using = "#button-new")
-    WebElement addButton;
+    private WebElement addButton;
 
     @FindBy(id = "filter")
-    WebElement searchTextField;
+    private WebElement searchTextField;
 
     @FindBy(id = "schrift-course")
-    WebElement expandSubjectsListButton;
+    private WebElement expandSubjectsListButton;
 
     @FindBy(how = How.CSS, using = ".viewport")
-    WebElement subjectsList;
+    private WebElement subjectsList;
 
     @FindBy(id = "button-toggle-favorites")
-    WebElement favouritesFilter;
+    private WebElement favouritesFilter;
 
     @FindBy(how = How.CSS, using = ".existingNote")
-    WebElement noteArea;
+    private WebElement noteArea;
 
     public void clickAddButton() {
 
@@ -53,13 +54,17 @@ public class NotebookPage {
     public void searchNote(String text) {
 
         ActionUtils.waitForElementToBeDisplayed(noteArea);
+        
         searchTextField.sendKeys(text);
+        
         ActionUtils.waitForElementToBeClickable(noteArea);
     }
 
     public void clearSearchField() {
-
-        searchTextField.clear();
+    	
+    	searchTextField.click();
+    	searchTextField.sendKeys(Keys.chord(Keys.CONTROL,"a"));
+    	searchTextField.sendKeys(Keys.DELETE);
     }
 
     public void expandSubjectList() {
@@ -68,7 +73,7 @@ public class NotebookPage {
         expandSubjectsListButton.click();
     }
 
-    public void findSubjectsListItem(List<WebElement> children, String subjectName) {
+    private  void findSubjectsListItem(List<WebElement> children, String subjectName) {
 
         for (WebElement element : children) {
             if (element.getText().equals(subjectName)) {
@@ -81,6 +86,7 @@ public class NotebookPage {
     public void clickSubjectsListItem(String subjectName) {
 
         List<WebElement> children = subjectsList.findElements(By.xpath(".//*"));
+        
         findSubjectsListItem(children, subjectName);
     }
 

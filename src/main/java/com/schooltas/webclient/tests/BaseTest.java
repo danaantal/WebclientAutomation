@@ -16,8 +16,8 @@ public class BaseTest implements ILoginConstants {
     public final void beforeTest() throws InterruptedException {
         System.out.println("BeforeTest");
         // System.setProperty("webdriver.chrome.driver", "/Users/dantal/Desktop/chromedriver");
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\ccostea\\Documents\\chromedriver.exe");
-        driver = BrowserFactory.startBrowser("chrome", "https://mijn-test.schooltas.net");
+        System.setProperty("webdriver.gecko.driver", "C:\\Users\\ccostea\\Documents\\geckodriver.exe");
+        driver = BrowserFactory.startBrowser("firefox", "https://mijn-test.schooltas.net");
         ActionUtils.loginAs("publisher");
     }
 

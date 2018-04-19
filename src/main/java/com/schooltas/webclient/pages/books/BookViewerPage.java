@@ -11,59 +11,70 @@ import com.schooltas.webclient.utils.ActionUtils;
 public class BookViewerPage {
 
     @FindBy(how = How.CSS, using = ".toolbar-dashboard")
-    WebElement backToMyBooksPageButton;
+    private WebElement backToMyBooksPageButton;
 
     @FindBy(how = How.CSS, using = ".toolbar-search")
-    WebElement searchBookButton;
+    private WebElement searchBookButton;
 
     @FindBy(how = How.CSS, using = ".queryBox input")
-    WebElement searchInputField;
+    private WebElement searchInputField;
 
     @FindBy(how = How.CSS, using = ".close-search")
-    WebElement closeSearchButton;
+    private WebElement closeSearchButton;
 
     @FindBy(how = How.CSS, using = ".prikker-container")
-    List<WebElement> pageOverlay;
+    private List<WebElement> pageOverlay;
 
     @FindBy(id = "booktitle-popup")
-    WebElement bookTitlePopup;
+    private WebElement bookTitlePopup;
 
     @FindBy(how = How.XPATH, using = "//button[contains(.,'wordweb')]")
-    WebElement createWordwebButton;
+    private WebElement createWordwebButton;
 
     @FindBy(how = How.XPATH, using = "//button[contains(.,'new pin')]")
-    WebElement createPinButton;
+    private WebElement createPinButton;
 
     @FindBy(how = How.CSS, using = ".shown-transition [lang-ref-target]")
-    WebElement wordwebTopicInputField;
+    private WebElement wordwebTopicInputField;
 
     @FindBy(how = How.CSS, using = ".form-footer [type='submit']")
-    WebElement saveWordwebTopicButton;
+    private WebElement saveWordwebTopicButton;
 
     @FindBy(how = How.CSS, using = ".divided [type]")
-    WebElement startWordwebButton;
+    private WebElement startWordwebButton;
 
     @FindBy(how = How.CSS, using = ".remove-button")
     WebElement removeWordwebButton;
 
     public void goToMyBooksList() {
+    	
         backToMyBooksPageButton.click();
     }
 
     public void addWordweb() {
+    	
         ActionUtils.waitForElementToBeClickable(createWordwebButton);
         createWordwebButton.click();
+        
         wordwebTopicInputField.sendKeys("Automated Wordweb");
+        
         saveWordwebTopicButton.click();
     }
-
+    
+    public void addNotePin(){
+    
+    	
+    }
+    
     public void rightClick() {
+    	
         ActionUtils.waitForElementToBeDisplayed(bookTitlePopup);
         ActionUtils.waitForElementToBeDisplayed(pageOverlay.get(0));
         ActionUtils.rightClick(pageOverlay.get(0));
     }
 
     public void checkBookViewerIsLoaded() {
+    	
         ActionUtils.waitForElementToBeDisplayed(backToMyBooksPageButton);
     }
 }

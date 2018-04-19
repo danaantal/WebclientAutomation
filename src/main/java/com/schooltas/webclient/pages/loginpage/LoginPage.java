@@ -20,13 +20,13 @@ public class LoginPage {
     }
 
     @FindBy(id = "login-email")
-    WebElement emailField;
+    private WebElement emailField;
 
     @FindBy(id = "login-password")
-    WebElement passwordField;
+    private WebElement passwordField;
 
     @FindBy(id = "logins")
-    WebElement loginBtn;
+    private WebElement loginBtn;
 
     @FindBy(id = "percentageLoader")
     WebElement alertOverlay;
@@ -41,17 +41,19 @@ public class LoginPage {
     WebElement languageList;
 
     public void login(String email, String password) throws InterruptedException {
-        Thread.sleep(7000);
+    	
+        Thread.sleep(5000);
         currentLanguage.click();
         clickDesiredLanguage("English");
         WaitForHeaderToBeVisible();
+        
         emailField.sendKeys(email);
         passwordField.sendKeys(password);
         loginBtn.click();
 
     }
 
-    public void findLanguageListOption(List<WebElement> children, String languageName) {
+    private void findLanguageListOption(List<WebElement> children, String languageName) {
 
         for (WebElement element : children) {
             if (element.getText().equals(languageName)) {
@@ -61,13 +63,14 @@ public class LoginPage {
         }
     }
 
-    public void clickDesiredLanguage(String languageName) {
+    private void clickDesiredLanguage(String languageName) {
 
         List<WebElement> children = languageList.findElements(By.xpath(".//*"));
         findLanguageListOption(children, languageName);
     }
 
-    public void WaitForHeaderToBeVisible() {
+    private void WaitForHeaderToBeVisible() {
+    	
         WebDriverWait wait = new WebDriverWait(driver, 10);
         wait.until(
                 ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(), 'reinvent learning')]")));

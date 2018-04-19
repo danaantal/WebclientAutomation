@@ -14,90 +14,105 @@ import com.schooltas.webclient.utils.ActionUtils;
 public class NotePage {
 
     @FindBy(how = How.CSS, using = "textarea:nth-child(2)")
-    WebElement noteTextInputArea;
+    private WebElement noteTextInputArea;
 
     @FindBy(how = How.CLASS_NAME, using = "newTag")
-    WebElement tagTextArea;
+    private WebElement tagTextArea;
 
     @FindBy(how = How.CSS, using = "div.body")
-    List<WebElement> noteText;
+	public List<WebElement> noteText;
 
     @FindBy(how = How.CSS, using = ".editMode .createUpdateNote")
-    WebElement saveButton;
+    private WebElement saveButton;
 
     @FindBy(how = How.CSS, using = ".editMode .button-cancel")
-    WebElement cancelButton;
+    private WebElement cancelButton;
 
     @FindBy(how = How.CSS, using = ".editMode [type='file']")
-    WebElement addAttachmentButton;
+    private WebElement addAttachmentButton;
 
     @FindBy(how = How.CSS, using = ".goto-prikker")
-    List<WebElement> goToPinNoteButton;
+    private List<WebElement> goToPinNoteButton;
 
     @FindBy(how = How.CSS, using = ".button-edit")
-    List<WebElement> editNoteButton;
+    private List<WebElement> editNoteButton;
 
     @FindBy(how = How.CSS, using = ".button-delete")
-    List<WebElement> deleteButton;
+    private List<WebElement> deleteButton;
 
     @FindBy(how = How.CSS, using = ".popout-button-delete")
-    List<WebElement> confirmDeletionButton;
+    private List<WebElement> confirmDeletionButton;
 
     @FindBy(how = How.CSS, using = ".popout-button-cancel")
-    List<WebElement> cancelDeletionButton;
+    private List<WebElement> cancelDeletionButton;
 
     @FindBy(how = How.CSS, using = ".button-fav")
-    List<WebElement> favouriteButton;
+    private List<WebElement> favouriteButton;
 
     public void addNoteContent() {
+    	
         ActionUtils.waitForElementToBeDisplayed(noteTextInputArea);
-        noteTextInputArea.sendKeys("TEST NOTE \n www.google.ro");
+        noteTextInputArea.sendKeys("Test note Search&Delete");
+        
         tagTextArea.sendKeys("Test Tag");
+        
         addAttachmentButton.sendKeys("E:\\book_new.jpg");
     }
 
     public void saveNote() {
+    	
         saveButton.click();
     }
 
     public void clickEditButton() {
+    	
         ActionUtils.waitForElementToBeClickable(editNoteButton.get(0));
         editNoteButton.get(0).click();
     }
 
     public void changeNoteContent() {
+    	
         noteTextInputArea.clear();
+        
         noteTextInputArea.sendKeys("This is Edited");
     }
 
     public void makeNoteFavourite() {
-        ActionUtils.waitForElementToBeClickable(favouriteButton.get(0));
+    	
+        ActionUtils.waitForElementToBeDisplayed(favouriteButton.get(0));
         favouriteButton.get(0).click();
     }
 
-    public void deleteNote() {
+    public void deleteNote(){
+    	
         ActionUtils.waitForElementToBeClickable(deleteButton.get(0));
         deleteButton.get(0).click();
         confirmDeletionButton.get(0).click();
     }
 
     public void checkNoteIsCreated() {
-        ActionUtils.waitForTextToBeDisplayed(noteText.get(0), "TEST NOTE www.google.ro");
-        assertEquals(noteText.get(0).getText(), "TEST NOTE www.google.ro");
+    	
+        ActionUtils.waitForTextToBeDisplayed(noteText.get(0), "Test note Search&Delete");
+        assertEquals(noteText.get(0).getText(), "Test note Search&Delete");
     }
 
     public void checkNoteIsEdited() {
+    	
         ActionUtils.waitForTextToBeDisplayed(noteText.get(0), "This is Edited");
         assertEquals(noteText.get(0).getText(), "This is Edited");
     }
 
     public void checkNoteIsDisplayedAfterSearch(String text) {
+    	
         ActionUtils.waitForTextToBeDisplayed(noteText.get(0), text);
         assertEquals(noteText.get(0).getText(), text);
     }
 
-    public void checkNoteIsDeleted() {
-        ActionUtils.waitForElementToBeDisplayed(noteText.get(0));
-        assertNotEquals(noteText.get(0).getText(), "This is Edited");
+    public void checkNoteIsDeleted() throws InterruptedException {
+    	
+    	Thread.sleep(1000);
+    	assertEquals(noteText.size(),0);
+    	
+
     }
 }

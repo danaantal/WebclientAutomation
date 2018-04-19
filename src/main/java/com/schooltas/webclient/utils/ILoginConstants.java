@@ -2,7 +2,7 @@ package com.schooltas.webclient.utils;
 
 public interface ILoginConstants {
 
-    public static final String TEST_PUBLISHER_EMAIL = "dana.antal+10@gmail.com";
+    public static final String TEST_PUBLISHER_EMAIL = "dana.antal@gmail.com";
     public static final String TEST_SCHOOL_EMAIL = "dan.nastasa@centric.eu";
     public static final String TEST_DISTRIBUTOR_EMAIL = "cristian.lucutar@centric.eu";
 

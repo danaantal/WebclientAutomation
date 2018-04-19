@@ -11,39 +11,44 @@ import com.schooltas.webclient.utils.ActionUtils;
 
 public class LanguagePage {
 
-    @FindBy(how = How.CSS, using = "#alert-popup .current-language")
-    WebElement currentLanguage;
+	@FindBy(how = How.CSS, using = "#alert-popup .current-language")
+	private WebElement currentLanguage;
 
-    @FindBy(how = How.CSS, using = "#alert-popup .language-select")
-    WebElement listOfAvailableLanguages;
+	@FindBy(how = How.CSS, using = "#alert-popup .language-select")
+	private WebElement listOfAvailableLanguages;
 
-    @FindBy(how = How.CSS, using = ".btn-custom")
-    WebElement okButton;
+	@FindBy(how = How.CSS, using = ".btn-custom")
+	private WebElement okButton;
 
-    @FindBy(how = How.CSS, using = "#alert-popup .white:nth-of-type(5)")
-    WebElement cancelButton;
+	@FindBy(how = How.CSS, using = "#alert-popup .white:nth-of-type(5)")
+	private WebElement cancelButton;
 
-    public void expandLanguageList() {
-        currentLanguage.click();
-    }
+	public void expandLanguageList() {
 
-    public void confirmLanguageChange() {
-        okButton.click();
-    }
+		currentLanguage.click();
+	}
 
-    public void findLanguagesList(List<WebElement> children, String languageName) {
+	public void confirmLanguageChange() {
 
-        for (WebElement element : children) {
-            if (element.getText().equals(languageName)) {
-                element.click();
-                return;
-            }
-        }
-    }
+		okButton.click();
+	}
 
-    public void clickLanguage(String languageName) {
-        ActionUtils.waitForElementToBeClickable(listOfAvailableLanguages);
-        List<WebElement> children = listOfAvailableLanguages.findElements(By.xpath(".//*"));
-        findLanguagesList(children, languageName);
-    }
+	private void findLanguagesList(List<WebElement> children, String languageName) {
+
+		for (WebElement element : children) {
+			if (element.getText().equals(languageName)) {
+				element.click();
+				return;
+			}
+		}
+	}
+
+	public void clickLanguage(String languageName) {
+
+		ActionUtils.waitForElementToBeClickable(listOfAvailableLanguages);
+
+		List<WebElement> children = listOfAvailableLanguages.findElements(By.xpath(".//*"));
+
+		findLanguagesList(children, languageName);
+	}
 }

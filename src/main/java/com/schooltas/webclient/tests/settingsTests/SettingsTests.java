@@ -21,117 +21,105 @@ public class SettingsTests extends BaseTest {
         homepage = PageFactory.initElements(driver, HomePage.class);
     }
 
-    @Test
-    public void addLicense() {
+    @Test(priority = 1)
+    public void addLicense(){
 
         MyBundlesPage myBundlePage = PageFactory.initElements(driver, MyBundlesPage.class);
-
+        
         homepage.showUserMenu();
         homepage.clickUserMenuOption("my bundles");
-
         myBundlePage.addLicense("123abcd1");
+        myBundlePage.clickOkErrorButton();
         myBundlePage.closeWindow();
     }
 
-    @Test
-    public void addSubscription() {
+    @Test(priority = 2)
+    public void addSubscription(){
         MySubscriptionsPage mySubscriptionsPage = PageFactory.initElements(driver, MySubscriptionsPage.class);
 
         homepage.showUserMenu();
         homepage.clickUserMenuOption("my subscriptions");
-
         mySubscriptionsPage.addSubscription("121212");
         mySubscriptionsPage.closeWindow();
     }
 
-    @Test
-    public void changeAvatar() {
+    @Test(priority = 3)
+    public void changeAvatar(){
         MyAccountPage myAccountPage = PageFactory.initElements(driver, MyAccountPage.class);
-
+        
         homepage.showUserMenu();
         homepage.clickUserMenuOption("my account");
-
         myAccountPage.changeAvatar();
         myAccountPage.closeWindow();
     }
 
-    @Test
-    public void changeName() {
+    @Test(priority = 4)
+    public void changeName(){
         MyAccountPage myAccountPage = PageFactory.initElements(driver, MyAccountPage.class);
 
         homepage.showUserMenu();
-
         homepage.clickUserMenuOption("my account");
-
-        myAccountPage.changeName("Dana", "AutomationTest");
-
+        myAccountPage.changeFirstName("Dana");
+        myAccountPage.changeLastName("AutomationTest");
+        myAccountPage.clickSaveButton("name");
         myAccountPage.checkIfNameIsChanged("Dana", "AutomationTest");
         myAccountPage.closeWindow();
     }
 
-    @Test
-    public void changePassword() {
+    @Test(priority = 5)
+    public void changePassword(){
 
         MyAccountPage myAccountPage = PageFactory.initElements(driver, MyAccountPage.class);
 
         homepage.showUserMenu();
-
         homepage.clickUserMenuOption("my account");
-
         myAccountPage.changePassword("test23", "test23");
+        myAccountPage.clickSaveButton("password");
         myAccountPage.checkIfPasswordIsChanged();
-
         myAccountPage.closeWindow();
     }
 
-    @Test
-    public void hideCourse() {
+    @Test(priority = 6)
+    public void hideCourse(){
 
         MyCoursesPage myCoursesPage = PageFactory.initElements(driver, MyCoursesPage.class);
 
-        homepage.waitCoursesToLoad();
+        //homepage.waitCoursesToLoad();
         homepage.showUserMenu();
-
         homepage.clickUserMenuOption("my courses");
         myCoursesPage.clickCourse("Academy");
-
         myCoursesPage.closeWindow();
-
         homepage.waitCoursesToLoad();
         homepage.checkIfTheCourseIsHidden("Academy");
     }
 
-    @Test
-    public void showCourse() {
+    @Test(priority = 7)
+    public void showCourse(){
 
         MyCoursesPage myCoursesPage = PageFactory.initElements(driver, MyCoursesPage.class);
 
-        homepage.waitCoursesToLoad();
+        //homepage.waitCoursesToLoad();
         homepage.showUserMenu();
-
         homepage.clickUserMenuOption("my courses");
         myCoursesPage.clickCourse("Academy");
-
         myCoursesPage.closeWindow();
         homepage.waitCoursesToLoad();
         homepage.checkIfTheCourseIsDisplayed("Academy");
     }
 
-    @Test
-    public void changeLanguage() {
+    @Test (priority = 8)
+    public void changeLanguage(){
 
         LanguagePage languagePage = PageFactory.initElements(driver, LanguagePage.class);
 
         homepage.showUserMenu();
         homepage.clickUserMenuOption("language");
-
         languagePage.expandLanguageList();
         languagePage.clickLanguage("Nederlands");
         languagePage.confirmLanguageChange();
 
         homepage.showUserMenu();
         homepage.clickUserMenuOption("taal");
-
         languagePage.expandLanguageList();
         languagePage.clickLanguage("English");
         languagePage.confirmLanguageChange();

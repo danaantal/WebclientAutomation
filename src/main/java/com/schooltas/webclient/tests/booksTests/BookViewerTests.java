@@ -26,7 +26,9 @@ public class BookViewerTests extends BaseTest {
     public void openBookViewer() {
 
         homepage.waitCoursesToLoad();
+        
         homepage.clickHomepageCourseItem("English");
+        
         myBooksPage.clickBook("Driving Technical Change 2");
         bookViewerPage.checkBookViewerIsLoaded();
         bookViewerPage.goToMyBooksList();
@@ -36,8 +38,11 @@ public class BookViewerTests extends BaseTest {
     public void addWordweb() {
 
         homepage.waitCoursesToLoad();
+        
         homepage.clickHomepageCourseItem("English");
+        
         myBooksPage.clickBook("Test book TOC #1");
+        
         bookViewerPage.checkBookViewerIsLoaded();
         bookViewerPage.rightClick();
         bookViewerPage.addWordweb();
