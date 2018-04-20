@@ -2,14 +2,24 @@ package com.schooltas.webclient.pages.books;
 
 import java.util.List;
 
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+import org.openqa.selenium.support.PageFactory;
 
+import com.schooltas.webclient.pages.notePage.NotePage;
 import com.schooltas.webclient.utils.ActionUtils;
 
 public class BookViewerPage {
 
+	private static WebDriver driver;
+	
+	public BookViewerPage(WebDriver driver) {
+
+		BookViewerPage.driver = driver;
+    }
+    
     @FindBy(how = How.CSS, using = ".toolbar-dashboard")
     private WebElement backToMyBooksPageButton;
 
@@ -31,9 +41,15 @@ public class BookViewerPage {
     @FindBy(how = How.XPATH, using = "//button[contains(.,'wordweb')]")
     private WebElement createWordwebButton;
 
+    @FindBy(how = How.CSS, using = ".wordweb")
+    private List<WebElement> listOfWordwebPins;
+    
     @FindBy(how = How.XPATH, using = "//button[contains(.,'new pin')]")
     private WebElement createPinButton;
 
+    @FindBy(how = How.CSS, using = ".prikker.my-note")
+    private List<WebElement> listOfNotePins;
+    
     @FindBy(how = How.CSS, using = ".shown-transition [lang-ref-target]")
     private WebElement wordwebTopicInputField;
 
@@ -46,6 +62,17 @@ public class BookViewerPage {
     @FindBy(how = How.CSS, using = ".remove-button")
     WebElement removeWordwebButton;
 
+    @FindBy(how = How.CSS, using = ".popup-cnt.shown .marker-popup-delete")
+    WebElement deleteNotePinButton;
+    
+    @FindBy(how = How.CSS, using = ".show .red:nth-of-type(1)")
+    WebElement deleteOptionIncludeNote;
+    
+    @FindBy(how = How.CSS, using = ".show .red:nth-of-type(2)")
+    WebElement deleteOptionJustPin;
+    
+    
+    
     public void goToMyBooksList() {
     	
         backToMyBooksPageButton.click();
@@ -61,10 +88,32 @@ public class BookViewerPage {
         saveWordwebTopicButton.click();
     }
     
-    public void addNotePin(){
-    
+    public void deleteWordweb(){
+
+    	ActionUtils.waitForElementToBeClickable(removeWordwebButton);
+    	removeWordwebButton.click();
     	
     }
+    
+    public void addNotePin(){
+    	NotePage notePage = PageFactory.initElements(driver, NotePage.class);
+    	ActionUtils.waitForElementToBeClickable(createPinButton);
+    	
+    	createPinButton.click();
+    	notePage.addNoteContent();
+    	notePage.saveNote();
+    	
+    }
+    
+    public void deleteNote(){
+    	ActionUtils.waitForElementToBeClickable(listOfNotePins.get(0));
+    	listOfNotePins.get(0).click();
+    	
+    	ActionUtils.waitForElementToBeClickable(deleteNotePinButton);
+    	deleteNotePinButton.click();
+    	deleteOptionIncludeNote.click();
+    }
+    
     
     public void rightClick() {
     	

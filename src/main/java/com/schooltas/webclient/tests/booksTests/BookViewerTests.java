@@ -35,7 +35,7 @@ public class BookViewerTests extends BaseTest {
     }
 
     @Test
-    public void addWordweb() {
+    public void addDeleteWordweb(){
 
         homepage.waitCoursesToLoad();
         
@@ -46,5 +46,23 @@ public class BookViewerTests extends BaseTest {
         bookViewerPage.checkBookViewerIsLoaded();
         bookViewerPage.rightClick();
         bookViewerPage.addWordweb();
+        
+        bookViewerPage.deleteWordweb();
+    }
+    
+    @Test
+    public void addDeletePinOnBook(){
+    	
+    	homepage.waitCoursesToLoad();
+        
+        homepage.clickHomepageCourseItem("English");
+        
+        myBooksPage.clickBook("Test book TOC #1");
+        
+        bookViewerPage.checkBookViewerIsLoaded();
+        bookViewerPage.rightClick();
+        bookViewerPage.addNotePin();
+        
+        bookViewerPage.deleteNote();
     }
 }

@@ -1,7 +1,6 @@
 package com.schooltas.webclient.pages.notePage;
 
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotEquals;
 
 import java.util.List;
 
