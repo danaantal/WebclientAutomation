@@ -2,6 +2,7 @@ package com.schooltas.webclient.pages.books;
 
 import java.util.List;
 
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -75,7 +76,7 @@ public class BookViewerPage {
     
     public void goToMyBooksList() {
     	
-        backToMyBooksPageButton.click();
+    	backToMyBooksPageButton.click();
     }
 
     public void addWordweb() {
@@ -83,6 +84,7 @@ public class BookViewerPage {
         ActionUtils.waitForElementToBeClickable(createWordwebButton);
         createWordwebButton.click();
         
+        ActionUtils.waitForElementToBeDisplayed(wordwebTopicInputField);
         wordwebTopicInputField.sendKeys("Automated Wordweb");
         
         saveWordwebTopicButton.click();
@@ -105,25 +107,25 @@ public class BookViewerPage {
     	
     }
     
-    public void deleteNote(){
+    public void deleteNotePin(){
     	ActionUtils.waitForElementToBeClickable(listOfNotePins.get(0));
     	listOfNotePins.get(0).click();
     	
     	ActionUtils.waitForElementToBeClickable(deleteNotePinButton);
     	deleteNotePinButton.click();
     	deleteOptionIncludeNote.click();
+    	
     }
-    
-    
+ 
     public void rightClick() {
     	
-        ActionUtils.waitForElementToBeDisplayed(bookTitlePopup);
+    	ActionUtils.waitForElementToBeInvisible(bookTitlePopup, 10);
         ActionUtils.waitForElementToBeDisplayed(pageOverlay.get(0));
+        
         ActionUtils.rightClick(pageOverlay.get(0));
     }
 
     public void checkBookViewerIsLoaded() {
-    	
         ActionUtils.waitForElementToBeDisplayed(backToMyBooksPageButton);
     }
 }

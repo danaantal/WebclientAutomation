@@ -22,7 +22,7 @@ public class BookViewerTests extends BaseTest {
         bookViewerPage = PageFactory.initElements(driver, BookViewerPage.class);
     }
 
-    @Test
+/*    @Test(priority = 1)
     public void openBookViewer() {
 
         homepage.waitCoursesToLoad();
@@ -32,9 +32,9 @@ public class BookViewerTests extends BaseTest {
         myBooksPage.clickBook("Driving Technical Change 2");
         bookViewerPage.checkBookViewerIsLoaded();
         bookViewerPage.goToMyBooksList();
-    }
+    }*/
 
-    @Test
+    @Test(priority = 1)
     public void addDeleteWordweb(){
 
         homepage.waitCoursesToLoad();
@@ -48,21 +48,23 @@ public class BookViewerTests extends BaseTest {
         bookViewerPage.addWordweb();
         
         bookViewerPage.deleteWordweb();
+
     }
     
-    @Test
+    @Test(priority = 2)
     public void addDeletePinOnBook(){
+    	
+    	bookViewerPage.goToMyBooksList();
     	
     	homepage.waitCoursesToLoad();
         
         homepage.clickHomepageCourseItem("English");
-        
-        myBooksPage.clickBook("Test book TOC #1");
+    	myBooksPage.clickBook("Test book TOC #1");
         
         bookViewerPage.checkBookViewerIsLoaded();
         bookViewerPage.rightClick();
         bookViewerPage.addNotePin();
         
-        bookViewerPage.deleteNote();
+        bookViewerPage.deleteNotePin();
     }
 }

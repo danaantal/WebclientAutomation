@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name = "WebclientAutomation" verbose="1">
+	<test name = "TestNG Tests">
+		<classes>
+			<class name = "com.schooltas.webclient.tests.booksTests.BookViewerTests"/>
+			<class name = "com.schooltas.webclient.tests.booksTests.MyBooksTests"/>
+		</classes>
+	</test>
+</suite>
