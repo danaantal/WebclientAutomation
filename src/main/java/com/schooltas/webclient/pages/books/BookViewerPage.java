@@ -2,7 +2,6 @@ package com.schooltas.webclient.pages.books;
 
 import java.util.List;
 
-import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;

@@ -19,15 +19,17 @@ public class BaseTest implements ILoginConstants {
     	   	
         System.out.println("BeforeTest");
         // System.setProperty("webdriver.chrome.driver", "/Users/dantal/Desktop/chromedriver");
-        System.setProperty("webdriver.gecko.driver", "E:\\WebclientAutomation\\lib\\geckodriver.exe");
+        System.setProperty("webdriver.gecko.driver", "E:\\WebclientAutomation\\lib\\geckodriver1.exe");
         driver = BrowserFactory.startBrowser("firefox", "https://mijn-test.schooltas.net");
         ActionUtils.loginAs("publisher");
     }
 
-    @AfterTest
+    @AfterTest(alwaysRun = true)
     public final void afterTest() throws InterruptedException {
-        // Close the instance of browser
-        Thread.sleep(1000);
+    	Thread.sleep(1000);
+    	ActionUtils.logout();
+        
+    	// Close the instance of browser
         driver.quit();
     }
 }

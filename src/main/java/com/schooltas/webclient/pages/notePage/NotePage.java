@@ -55,7 +55,7 @@ public class NotePage {
         
         tagTextArea.sendKeys("Test Tag");
         
-        addAttachmentButton.sendKeys("E:\\book_new.jpg");
+        addAttachmentButton.sendKeys("E:\\WebclientAutomation\\lib\\testGIF.gif");
     }
 
     public void saveNote() {

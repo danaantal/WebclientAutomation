@@ -46,9 +46,8 @@ public class LoginPage {
     @FindBy(how = How.CSS, using = "#form-login .secondary")
     WebElement registerLink;
 
-    public void login(String email, String password) throws InterruptedException {
+    public void login(String email, String password){
     	
-        //Thread.sleep(5000);
         ActionUtils.waitForElementToBeInvisible(alertOverlay, 10);
         currentLanguage.click();
         clickDesiredLanguage("English");

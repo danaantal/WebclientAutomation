@@ -57,7 +57,7 @@ public class MyAccountPage {
 	@FindBy(how = How.CSS, using = "#popover-screen-ok .header")
 	private WebElement passwordChangeConfirmationMessage;
 
-	@FindBy(how = How.XPATH, using = "//div[@id='popover-screen-ok']/button[@type='button']")
+	@FindBy(how = How.CSS, using = "#popover-screen-ok [type]")
 	private WebElement backToMyAccountAfterPasswordChangeButton;
 
 	public void changeAvatar() {

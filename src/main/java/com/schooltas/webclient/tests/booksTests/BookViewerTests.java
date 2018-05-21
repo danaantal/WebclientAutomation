@@ -66,5 +66,7 @@ public class BookViewerTests extends BaseTest {
         bookViewerPage.addNotePin();
         
         bookViewerPage.deleteNotePin();
+        
+        bookViewerPage.goToMyBooksList();
     }
 }

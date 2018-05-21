@@ -1,7 +1,6 @@
 package com.schooltas.webclient.utils;
 
 import java.util.NoSuchElementException;
-import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
@@ -10,11 +9,13 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.schooltas.webclient.pages.homepage.HomePage;
 import com.schooltas.webclient.pages.loginpage.LoginPage;
 import com.schooltas.webclient.tests.BaseTest;
 
 public class ActionUtils extends BaseTest {
-	public static void loginAs(String organization) throws InterruptedException {
+	
+	public static void loginAs(String organization){
 
 		LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
 
@@ -27,6 +28,15 @@ public class ActionUtils extends BaseTest {
 		}
 	}
 
+	public static void logout(){
+		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
+		
+		homePage.goToHomepage();
+		homePage.showUserMenu();
+        homePage.clickUserMenuOption("logout");
+       
+	}
+	
 	public static void waitForElementToBeDisplayed(WebElement element) {
 		WebDriverWait wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.visibilityOf(element));
@@ -53,7 +63,27 @@ public class ActionUtils extends BaseTest {
 
 	public static void waitForElementToBeClickable(WebElement element) {
 		WebDriverWait wait = new WebDriverWait(driver, 10);
-		wait.until(ExpectedConditions.elementToBeClickable(element));
+		
+		try {
+			wait.until(ExpectedConditions.elementToBeClickable(element));			
+			System.out.println("Sucessfully clicked on the element");
+		}
+		catch(Exception e){
+			System.out.println("Element " + element + " was not clickable " + e.getStackTrace());
+		}
+		
+	}
+	
+	public static boolean elementIsClickable(WebElement element) {
+
+		boolean returnValue = false;
+
+		try {
+			ExpectedConditions.elementToBeClickable(element);
+			returnValue = true;
+		} catch (Exception e) {
+		}
+		return returnValue;
 	}
 
 	public static void rightClick(WebElement element) {
