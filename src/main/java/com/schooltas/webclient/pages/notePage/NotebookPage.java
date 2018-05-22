@@ -32,6 +32,9 @@ public class NotebookPage {
 
     @FindBy(how = How.CSS, using = ".existingNote")
     private WebElement noteArea;
+    
+    @FindBy(id = "percentageLoader")
+    public WebElement alertOverlay;
 
     public void clickAddButton() {
 

@@ -11,6 +11,7 @@ import com.schooltas.webclient.pages.settings.MyBundlesPage;
 import com.schooltas.webclient.pages.settings.MyCoursesPage;
 import com.schooltas.webclient.pages.settings.MySubscriptionsPage;
 import com.schooltas.webclient.tests.BaseTest;
+import com.schooltas.webclient.utils.ActionUtils;
 
 public class SettingsTests extends BaseTest {
 
@@ -123,5 +124,6 @@ public class SettingsTests extends BaseTest {
         languagePage.expandLanguageList();
         languagePage.clickLanguage("English");
         languagePage.confirmLanguageChange();
+        ActionUtils.waitForElementToBeInvisible(homepage.alertOverlay, 10);
     }
 }

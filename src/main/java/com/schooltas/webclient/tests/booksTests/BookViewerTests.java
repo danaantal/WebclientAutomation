@@ -22,18 +22,6 @@ public class BookViewerTests extends BaseTest {
         bookViewerPage = PageFactory.initElements(driver, BookViewerPage.class);
     }
 
-/*    @Test(priority = 1)
-    public void openBookViewer() {
-
-        homepage.waitCoursesToLoad();
-        
-        homepage.clickHomepageCourseItem("English");
-        
-        myBooksPage.clickBook("Driving Technical Change 2");
-        bookViewerPage.checkBookViewerIsLoaded();
-        bookViewerPage.goToMyBooksList();
-    }*/
-
     @Test(priority = 1)
     public void addDeleteWordweb(){
 

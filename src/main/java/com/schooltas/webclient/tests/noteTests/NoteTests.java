@@ -92,5 +92,6 @@ public class NoteTests extends BaseTest{
 		notePage.checkNoteIsDeleted();
 		
 		notebookPage.clearSearchField();
+		ActionUtils.waitForElementToBeInvisible(notebookPage.alertOverlay, 10);
 	}
 }

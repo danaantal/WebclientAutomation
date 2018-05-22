@@ -1,5 +1,7 @@
 package com.schooltas.webclient.pages.books;
 
+import static org.testng.Assert.assertEquals;
+
 import java.util.List;
 
 import org.openqa.selenium.WebDriver;
@@ -94,6 +96,8 @@ public class BookViewerPage {
     	ActionUtils.waitForElementToBeClickable(removeWordwebButton);
     	removeWordwebButton.click();
     	
+    	assertEquals(listOfWordwebPins.size(), 0);
+    	
     }
     
     public void addNotePin(){
@@ -114,6 +118,8 @@ public class BookViewerPage {
     	deleteNotePinButton.click();
     	deleteOptionIncludeNote.click();
     	
+    	assertEquals(listOfNotePins.size(), 0);
+    	
     }
  
     public void rightClick() {
@@ -126,5 +132,6 @@ public class BookViewerPage {
 
     public void checkBookViewerIsLoaded() {
         ActionUtils.waitForElementToBeDisplayed(backToMyBooksPageButton);
+        ActionUtils.waitForElementToBeDisplayed(bookTitlePopup);
     }
 }

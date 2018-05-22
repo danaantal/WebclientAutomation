@@ -44,6 +44,9 @@ public class HomePage {
     
     @FindBy(how = How.XPATH, using= "//html[contains(@class,'expanded')]")
     private WebElement notebookExpanded;
+    
+    @FindBy(id = "percentageLoader")
+    public WebElement alertOverlay;
 
 	public void showUserMenu() {
 
